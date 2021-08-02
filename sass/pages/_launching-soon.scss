@@ -1,0 +1,19 @@
+@use "../utils/variables" as *;
+
+body{
+    background-image: url("../../images/pattern-hills.svg"), url("../../images/bg-stars.svg");
+    background-repeat: no-repeat, no-repeat;
+    background-position: bottom center, center;
+    background-color: $neutral-color-4;
+}
+
+h1{
+    color: $neutral-color-1;
+    font-size: 2rem;
+    letter-spacing: 0.3em;
+}
+
+p{
+    color : $primary-color-1;
+}
+
