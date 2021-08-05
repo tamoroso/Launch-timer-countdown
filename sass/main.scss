@@ -3,6 +3,7 @@
 @use './base/typography' as *;
 
 // components
+@use './components/_clock' as *;
 
 // pages
 @use './pages/launching-soon' as *;

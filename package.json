@@ -4,7 +4,7 @@
   "description": "![Design preview for the Launch countdown timer coding challenge](./design/desktop-preview.jpg)",
   "main": "index.js",
   "scripts": {
-    "sass" : "sass --watch sass/main.scss:css/style.css"
+    "sass": "sass --watch sass/main.scss:css/style.css"
   },
   "repository": {
     "type": "git",
@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/tamoroso/Launch-timer-countdown/issues"
   },
-  "homepage": "https://github.com/tamoroso/Launch-timer-countdown#readme"
+  "homepage": "https://github.com/tamoroso/Launch-timer-countdown#readme",
+  "dependencies": {
+    "moment": "^2.29.1"
+  }
 }

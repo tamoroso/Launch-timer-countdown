@@ -1,0 +1,155 @@
+@use '../utils/variables' as *;
+@use '../utils/mixins' as *;
+
+// Style adapted from https://codepen.io/shshaw/pen/vKzoLL
+
+
+.clock-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 90%;
+
+}
+
+.flip-clock {
+    text-align: center;
+    perspective: 900px;
+    margin: 9em auto;
+    
+    *,
+    *:before,
+    *:after { box-sizing: border-box; }
+}
+
+.flip-clock__piece{
+    display: inline-block;
+    margin: 0 1.5em;
+}
+
+
+.flip-clock__slot{
+    display: inline-block;
+    text-transform: uppercase;
+    letter-spacing: 0.5em;
+    margin-top: 1.5em;
+    font-size: 1.2vw;
+    color: adjust-color($neutral-color-2, $lightness : 40%);
+}
+
+.card{
+    display: block;
+    position: relative;
+    padding-bottom: $halfHeight;
+    border-radius: $borderRadius;
+    font-size: 7vw;
+    line-height: 1.1;
+    box-shadow: 0 13px black, inset 0 0 20px black ;
+}
+
+
+.card__top,
+.card__bottom,
+.card__back::before,
+.card__back::after {
+    display: block;
+    height: $halfHeight;
+    color: $primary-color-2;
+    padding: 0.25em 0.25em;
+    border-radius: $borderRadius $borderRadius 0 0;
+    backface-visibility: hidden;
+    transform-style: preserve-3d;
+    width: 1.8em;
+    transform: translateZ(0);
+}
+
+.card__top,
+.card__back::before,
+.card__back::after{
+    @include scoop-corners-bottom(7%, adjust-color($neutral-color-2, $lightness : -6%));
+    color: adjust-color($primary-color-2, $blackness : 20%);
+}
+
+.card__bottom,
+.card__bottom::after,
+.card__bottom::before{
+    @include scoop-corners-top(7%, $neutral-color-2);
+}
+
+.card__bottom{
+    color : $primary-color-2;
+    position: absolute;
+    top: 50%;
+    left: 0;
+    border-top: solid 1px $neutral-color-4;
+    border-radius: 0 0 $borderRadius $borderRadius;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+.card__bottom::after{
+    display: block;
+    margin-top: -$halfHeight;
+}
+
+.card__back::before,
+.card__bottom::after{
+    content: attr(data-value);
+}
+
+.card__back{
+    position: absolute;
+    top: 0;
+    height: 100%;
+    left: 0%;
+    pointer-events: none;
+}
+
+.card__back::before{
+    position: relative;
+    z-index: -1;
+    overflow: hidden;
+}
+
+.flip .card__back::before{
+    animation: flipTop 0.3s cubic-bezier(.37, .01, .94, .35);
+    animation-fill-mode: both;
+    transform-origin: center bottom;
+}
+
+.flip .card__back .card__bottom {
+    transform-origin: center top;
+    animation-fill-mode: both;
+    animation: flipBottom 0.6s cubic-bezier(.15,.45,.28,1);// 0.3s; 
+}
+  
+@keyframes flipTop {
+0% {
+    transform: rotateX(0deg);
+    z-index: 2;
+}
+0%, 99% {
+    opacity: 0.99;
+}
+100% {
+    transform: rotateX(-90deg);
+    opacity: 0;
+}
+}
+  
+@keyframes flipBottom {
+0%, 50% {
+    z-index: -1;
+    transform: rotateX(90deg);
+    opacity: 0;
+}
+51% {
+    opacity: 0.99;
+}
+100% {
+    opacity: 0.99;
+    transform: rotateX(0deg);
+    z-index: 5;
+}
+}
